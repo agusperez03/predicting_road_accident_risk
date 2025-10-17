@@ -3,6 +3,8 @@
 ## Project Overview
 This project builds a machine learning model to predict the likelihood of accidents on different types of roads. The model predicts **accident risk** as a continuous value between 0 and 1, based on various road and environmental features.
 
+**Kaggle Competition**: [Playground Series S5E10 - Predicting Road Accident Risk](https://www.kaggle.com/competitions/playground-series-s5e10/overview)
+
 ## Dataset
 
 ### Training Data
