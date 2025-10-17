@@ -1,0 +1,19 @@
+# Development Dependencies
+# ========================
+# These dependencies are used for testing, linting, and development only
+
+# Testing
+pytest==7.4.3
+pytest-cov==4.1.0
+
+# Code Quality
+black==23.12.1
+flake8==6.1.0
+isort==5.13.2
+
+# Security
+bandit==1.7.6
+safety==2.3.5
+
+# Type Checking (optional)
+mypy==1.7.1
