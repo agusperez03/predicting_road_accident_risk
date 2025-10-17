@@ -8,6 +8,7 @@ import joblib
 import pandas as pd
 import os
 from typing import Dict, Tuple
+from pathlib import Path
 
 
 class RiskPredictor:
@@ -20,7 +21,11 @@ class RiskPredictor:
         Args:
             models_dir: Directory containing model files
         """
-        self.models_dir = models_dir
+        # Get the absolute path to the models directory
+        # This file is in utils/, so we go up one level to road_risk_game/
+        current_dir = Path(__file__).parent.parent
+        self.models_dir = current_dir / models_dir
+        
         self.model = None
         self.label_encoders = None
         self.feature_names = None
@@ -29,9 +34,13 @@ class RiskPredictor:
     def load_model(self):
         """Load the trained model and encoders."""
         try:
-            model_path = os.path.join(self.models_dir, "accident_risk_model.joblib")
-            encoders_path = os.path.join(self.models_dir, "label_encoders.joblib")
-            features_path = os.path.join(self.models_dir, "feature_names.joblib")
+            model_path = self.models_dir / "accident_risk_model.joblib"
+            encoders_path = self.models_dir / "label_encoders.joblib"
+            features_path = self.models_dir / "feature_names.joblib"
+            
+            # Debug: print paths
+            print(f"Loading model from: {model_path}")
+            print(f"Model exists: {model_path.exists()}")
             
             self.model = joblib.load(model_path)
             self.label_encoders = joblib.load(encoders_path)
@@ -40,6 +49,9 @@ class RiskPredictor:
             print("✓ Model loaded successfully")
         except Exception as e:
             print(f"Error loading model: {e}")
+            print(f"Current working directory: {os.getcwd()}")
+            print(f"Script directory: {Path(__file__).parent}")
+            print(f"Models directory: {self.models_dir}")
             raise
     
     def preprocess_scenario(self, scenario: Dict) -> pd.DataFrame:
