@@ -196,23 +196,51 @@ class RoadVisualizer:
         Returns:
             Formatted description string
         """
+        # Emojis
         road_emoji = RoadVisualizer.ROAD_EMOJIS.get(scenario['road_type'], '🛣️')
         weather_emoji = RoadVisualizer.WEATHER_EMOJIS.get(scenario['weather'], '')
         lighting_emoji = RoadVisualizer.LIGHTING_EMOJIS.get(scenario['lighting'], '')
         time_emoji = RoadVisualizer.TIME_EMOJIS.get(scenario['time_of_day'], '')
         
-        curvature_desc = "recta" if scenario['curvature'] < 0.3 else "curva moderada" if scenario['curvature'] < 0.7 else "curva cerrada"
-        signs = "con señales" if scenario['road_signs_present'] else "sin señales"
+        # Traducciones
+        road_type_es = {
+            'highway': 'Autopista',
+            'rural': 'Rural',
+            'urban': 'Urbano'
+        }
+        
+        weather_es = {
+            'clear': 'Despejado',
+            'foggy': 'Neblina',
+            'rainy': 'Lluvia'
+        }
+        
+        lighting_es = {
+            'daylight': 'Día',
+            'dim': 'Penumbra',
+            'night': 'Noche'
+        }
+        
+        time_es = {
+            'morning': 'Mañana',
+            'afternoon': 'Tarde',
+            'evening': 'Noche'
+        }
+        
+        # Descripciones
+        curvature_desc = "Recta" if scenario['curvature'] < 0.3 else "Curva moderada" if scenario['curvature'] < 0.7 else "Curva cerrada"
+        signs = "Con señales" if scenario['road_signs_present'] else "Sin señales"
         
         description = f"""
-{road_emoji} **{scenario['road_type'].capitalize()}** con {scenario['num_lanes']} carril(es)
-🌀 {curvature_desc.capitalize()} (curv: {scenario['curvature']:.2f})
-⚡ Límite: {scenario['speed_limit']} mph
-{weather_emoji} Clima: {scenario['weather']}
-{lighting_emoji} Iluminación: {scenario['lighting']}
-{time_emoji} Momento: {scenario['time_of_day']}
-🚸 {signs.capitalize()}
-📊 Accidentes previos: {scenario['num_reported_accidents']}
+<p>{road_emoji} <strong>Tipo:</strong> {road_type_es.get(scenario['road_type'], scenario['road_type'])}</p>
+<p>🛣️ <strong>Carriles:</strong> {scenario['num_lanes']}</p>
+<p>🌀 <strong>Curvatura:</strong> {curvature_desc} ({scenario['curvature']:.2f})</p>
+<p>⚡ <strong>Límite de velocidad:</strong> {scenario['speed_limit']} mph</p>
+<p>{weather_emoji} <strong>Clima:</strong> {weather_es.get(scenario['weather'], scenario['weather'])}</p>
+<p>{lighting_emoji} <strong>Iluminación:</strong> {lighting_es.get(scenario['lighting'], scenario['lighting'])}</p>
+<p>{time_emoji} <strong>Momento del día:</strong> {time_es.get(scenario['time_of_day'], scenario['time_of_day'])}</p>
+<p>🚸 <strong>Señalización:</strong> {signs}</p>
+<p>📊 <strong>Accidentes previos:</strong> {scenario['num_reported_accidents']}</p>
         """
         return description.strip()
     

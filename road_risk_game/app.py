@@ -244,10 +244,12 @@ else:
     col1, col2 = st.columns(2)
     
     with col1:
-        st.markdown("### 🅰️ Camino A")
-        st.markdown('<div class="scenario-card">', unsafe_allow_html=True)
-        st.markdown(RoadVisualizer.get_scenario_description(scenario1))
-        st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown(f"""
+        <div class="scenario-card">
+            <h3>🅰️ Camino A</h3>
+            {RoadVisualizer.get_scenario_description(scenario1)}
+        </div>
+        """, unsafe_allow_html=True)
         
         if st.button("🎯 Seleccionar Camino A", key="btn_a", type="primary", use_container_width=True):
             # Make prediction
@@ -282,10 +284,12 @@ else:
             st.rerun()
     
     with col2:
-        st.markdown("### 🅱️ Camino B")
-        st.markdown('<div class="scenario-card">', unsafe_allow_html=True)
-        st.markdown(RoadVisualizer.get_scenario_description(scenario2))
-        st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown(f"""
+        <div class="scenario-card">
+            <h3>🅱️ Camino B</h3>
+            {RoadVisualizer.get_scenario_description(scenario2)}
+        </div>
+        """, unsafe_allow_html=True)
         
         if st.button("🎯 Seleccionar Camino B", key="btn_b", type="primary", use_container_width=True):
             # Make prediction
