@@ -5,6 +5,8 @@ This project builds a machine learning model to predict the likelihood of accide
 
 **Kaggle Competition**: [Playground Series S5E10 - Predicting Road Accident Risk](https://www.kaggle.com/competitions/playground-series-s5e10/overview)
 
+***Try out** the game developed from this model on prod: https://roadriskgame.streamlit.app/
+
 ## Dataset
 
 ### Training Data
